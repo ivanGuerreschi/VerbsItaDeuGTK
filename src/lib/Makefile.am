@@ -17,7 +17,7 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with Nome-Programma.  If not, see <http://www.gnu.org/licenses/>.
+# along with verbsitadeugtk.  If not, see <http://www.gnu.org/licenses/>.
 
 AM_CFLAGS = -I $(top_srcdir)/src/lib -Wall -Wextra -Wpedantic \
           -Wformat=2 -Wno-unused-parameter -Wshadow \
