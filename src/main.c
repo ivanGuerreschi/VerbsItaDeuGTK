@@ -38,11 +38,16 @@ on_activate (GtkApplication *app)
   GtkWidget *button_translate_verb_deu;
   GtkWidget *button_all_verbs;
   GtkWidget *button_exist_verb;
+
+  const gchar *title = "Verbs Ita Deu"; 
   
   window = gtk_application_window_new (app);
-  gtk_window_set_title (GTK_WINDOW (window), "Verbs Ita Deu");
+  gtk_window_set_title (GTK_WINDOW (window), title);
+  gtk_container_set_border_width (GTK_CONTAINER (window), 5);
 
   grid = gtk_grid_new ();
+  gtk_grid_set_column_spacing(GTK_GRID(grid), 5);
+  gtk_grid_set_row_spacing(GTK_GRID(grid), 5);
  
   gtk_container_add (GTK_CONTAINER (window), grid);
 
@@ -58,16 +63,16 @@ on_activate (GtkApplication *app)
   entry_verb_deu = gtk_entry_new ();
   gtk_grid_attach (GTK_GRID (grid), entry_verb_deu, 1, 1, 1, 1);
 
-  button_rdm_verb_ita = gtk_button_new_with_label ("Rdm Verb Ita");  
+  button_rdm_verb_ita = gtk_button_new_with_label ("Rdm verb Ita");  
   gtk_grid_attach (GTK_GRID (grid), button_rdm_verb_ita, 0, 2, 1, 1);
   
-  button_translate_verb_ita = gtk_button_new_with_label ("Translate"); 
+  button_translate_verb_ita = gtk_button_new_with_label ("Translate verb Ita"); 
   gtk_grid_attach (GTK_GRID (grid), button_translate_verb_ita, 1, 2, 1, 1);
 
-  button_rdm_verb_deu = gtk_button_new_with_label ("Rdm Verb Deu");  
+  button_rdm_verb_deu = gtk_button_new_with_label ("Rdm verb Deu");  
   gtk_grid_attach (GTK_GRID (grid), button_rdm_verb_deu, 0, 3, 1, 1);
   
-  button_translate_verb_deu = gtk_button_new_with_label ("Translate"); 
+  button_translate_verb_deu = gtk_button_new_with_label ("Translate verb Deu"); 
   gtk_grid_attach (GTK_GRID (grid), button_translate_verb_deu, 1, 3, 1, 1);
 
   button_all_verbs = gtk_button_new_with_label ("All Verbs");  
@@ -75,7 +80,7 @@ on_activate (GtkApplication *app)
   
   button_exist_verb = gtk_button_new_with_label ("Exist Verb"); 
   gtk_grid_attach (GTK_GRID (grid), button_exist_verb, 1, 4, 1, 1);
-  
+
   gtk_widget_show_all (window);
 }
 
