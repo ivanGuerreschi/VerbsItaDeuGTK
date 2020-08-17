@@ -27,6 +27,6 @@ AM_CFLAGS = $(GTK_CFLAGS) -I $(top_srcdir)/src -I $(top_srcdir)/src/lib \
 	  -Wjump-misses-init -Wlogical-op	
 
 bin_PROGRAMS = verbsitadeugtk
-verbsitadeugtk_SOURCES = main.c 
+verbsitadeugtk_SOURCES = main.c interface_verbs.c
 
 verbsitadeugtk_LDADD = $(top_builddir)/src/lib/libverbs.a $(AM_LDFLAGS) $(GTK_LIBS)

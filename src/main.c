@@ -22,6 +22,7 @@ along with verbsitadeugtk.  If not, see <http://www.gnu.org/licenses/>. */
 #include <stdbool.h>
 #include <gtk/gtk.h>
 #include "verbs.h"
+#include "include/interface_verbs.h"
 
 static void
 on_activate (GtkApplication *app)
@@ -46,8 +47,8 @@ on_activate (GtkApplication *app)
   gtk_container_set_border_width (GTK_CONTAINER (window), 5);
 
   grid = gtk_grid_new ();
-  gtk_grid_set_column_spacing(GTK_GRID(grid), 5);
-  gtk_grid_set_row_spacing(GTK_GRID(grid), 5);
+  gtk_grid_set_column_spacing (GTK_GRID(grid), 5);
+  gtk_grid_set_row_spacing (GTK_GRID(grid), 5);
  
   gtk_container_add (GTK_CONTAINER (window), grid);
 
@@ -65,6 +66,8 @@ on_activate (GtkApplication *app)
 
   button_rdm_verb_ita = gtk_button_new_with_label ("Rdm verb Ita");  
   gtk_grid_attach (GTK_GRID (grid), button_rdm_verb_ita, 0, 2, 1, 1);
+  g_signal_connect (button_rdm_verb_ita, "clicked", G_CALLBACK (rdm_verb_ita), NULL);
+  g_signal_connect_swapped (button_rdm_verb_ita, "clicked", G_CALLBACK (gtk_widget_destroy), window);
   
   button_translate_verb_ita = gtk_button_new_with_label ("Translate verb Ita"); 
   gtk_grid_attach (GTK_GRID (grid), button_translate_verb_ita, 1, 2, 1, 1);
@@ -96,5 +99,6 @@ main (int  argc,
   g_signal_connect (app, "activate", G_CALLBACK (on_activate), NULL);
   status = g_application_run (G_APPLICATION (app), argc, argv);
   g_object_unref (app);
+  
   return status;
 }
