@@ -141,6 +141,22 @@ translate_verb_deu (verb_t *verbs,
   return translate;
 }
 
+bool
+translate_verb_ita (verb_t *verbs,
+                    const char *verb_ita,
+                    const char *verb_deu,
+                    int row)
+{
+  bool translate = false;
+
+  for (int i = 0; i < row; i++)
+    if (strcmp (verbs[i].ita, verb_ita) == 0)
+      if (strcmp (verbs[i].deu, verb_deu) == 0)
+        translate = true;
+
+  return translate;
+}
+
 
 char
 *random_verb_ita (verb_t *verbs, int row)

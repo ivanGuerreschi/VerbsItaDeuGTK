@@ -56,7 +56,7 @@ rdm_verb_deu (GtkWidget *button,
   int row = count_row_file (file_row);
   verb_t *verbs = all_verbs (file_verbs, row);
 
-  gtk_entry_set_text (GTK_ENTRY (entrys->entry_verb_ita), random_verb_deu (verbs, row));
+  gtk_entry_set_text (GTK_ENTRY (entrys->entry_verb_deu), random_verb_deu (verbs, row));
 
   close_file (&file_verbs);
   close_file (&file_row);
@@ -94,3 +94,35 @@ tra_verb_deu (GtkWidget *button,
 
   free (verbs);
 }
+
+void
+tra_verb_ita (GtkWidget *button,
+	      EntryWidgets *entrys)
+{
+  FILE *file_verbs, *file_row = NULL;
+  open_file (&file_row, "verbs.dat");
+  open_file (&file_verbs, "verbs.dat");
+
+  const gchar *verb_deu;
+  const gchar *verb_ita;
+  const gchar *translate_OK = "Translate OK";
+  const gchar *translate_not_OK = "Translate not OK";
+
+  
+  int row = count_row_file (file_row);
+  verb_t *verbs = all_verbs (file_verbs, row);
+
+  verb_deu = gtk_entry_get_text (GTK_ENTRY (entrys->entry_verb_deu));
+  verb_ita = gtk_entry_get_text (GTK_ENTRY (entrys->entry_verb_ita));
+
+  if (translate_verb_ita (verbs, verb_ita, verb_deu, row))
+    gtk_entry_set_text (GTK_ENTRY (entrys->entry_verb_ita), translate_OK);
+  else
+    gtk_entry_set_text (GTK_ENTRY (entrys->entry_verb_ita), translate_not_OK);    
+
+  close_file (&file_verbs);
+  close_file (&file_row);
+
+  free (verbs);
+}
+

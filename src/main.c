@@ -70,6 +70,7 @@ on_activate (GtkApplication *app)
   
   button_translate_verb_ita = gtk_button_new_with_label ("Translate verb Ita"); 
   gtk_grid_attach (GTK_GRID (grid), button_translate_verb_ita, 1, 2, 1, 1);
+    g_signal_connect (button_translate_verb_ita, "clicked", G_CALLBACK (tra_verb_ita), entrys);
 
   button_rdm_verb_deu = gtk_button_new_with_label ("Rdm verb Deu");  
   gtk_grid_attach (GTK_GRID (grid), button_rdm_verb_deu, 0, 3, 1, 1);
@@ -78,7 +79,6 @@ on_activate (GtkApplication *app)
   button_translate_verb_deu = gtk_button_new_with_label ("Translate verb Deu"); 
   gtk_grid_attach (GTK_GRID (grid), button_translate_verb_deu, 1, 3, 1, 1);
   g_signal_connect (button_translate_verb_deu, "clicked", G_CALLBACK (tra_verb_deu), entrys);
-
 
   button_all_verbs = gtk_button_new_with_label ("All Verbs");  
   gtk_grid_attach (GTK_GRID (grid), button_all_verbs, 0, 4, 1, 1);

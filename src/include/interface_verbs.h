@@ -28,5 +28,6 @@ along with verbsitadeugtk.  If not, see <http://www.gnu.org/licenses/>. */
 void rdm_verb_ita (GtkWidget *button, EntryWidgets *entrys);
 void rdm_verb_deu (GtkWidget *button, EntryWidgets *entrys);
 void tra_verb_deu (GtkWidget *button, EntryWidgets *entrys);
+void tra_verb_ita (GtkWidget *button, EntryWidgets *entrys);
 
 #endif /* INTERFACE_VERBS_H  */
