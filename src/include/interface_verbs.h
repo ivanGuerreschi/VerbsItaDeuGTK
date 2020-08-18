@@ -22,6 +22,7 @@ along with verbsitadeugtk.  If not, see <http://www.gnu.org/licenses/>. */
 #ifndef INTERFACE_VERBS_H
 #define INTERFACE_VERBS_H
 
-void rdm_verb_ita (GtkWidget *widget, gpointer data);
+void rdm_verb_ita (GtkWidget *widget, gpointer entry);
+void rdm_verb_deu (GtkWidget *widget, gpointer   entry);
 
 #endif /* INTERFACE_VERBS_H  */

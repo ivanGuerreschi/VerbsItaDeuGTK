@@ -19,14 +19,15 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with verbsitadeugtk.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include <gtk/gtk.h>
 #include <stdbool.h>
+#include <stdlib.h>
+#include <gtk/gtk.h>
 #include "verbs.h"
 #include "include/interface_verbs.h"
 
 void
 rdm_verb_ita (GtkWidget *widget,
-	      gpointer   data)
+	      gpointer   entry)
 {
   FILE *file_verbs, *file_row = NULL;
   open_file (&file_row, "verbs.dat");
@@ -35,5 +36,29 @@ rdm_verb_ita (GtkWidget *widget,
   int row = count_row_file (file_row);
   verb_t *verbs = all_verbs (file_verbs, row);
 
-  g_print ("%s\n", random_verb_ita (verbs, row));
+  gtk_entry_set_text (GTK_ENTRY (entry), random_verb_ita (verbs, row));
+
+  close_file (&file_verbs);
+  close_file (&file_row);
+
+  free (verbs);
+}
+
+void
+rdm_verb_deu (GtkWidget *widget,
+	      gpointer   entry)
+{
+  FILE *file_verbs, *file_row = NULL;
+  open_file (&file_row, "verbs.dat");
+  open_file (&file_verbs, "verbs.dat");
+
+  int row = count_row_file (file_row);
+  verb_t *verbs = all_verbs (file_verbs, row);
+
+  gtk_entry_set_text (GTK_ENTRY (entry), random_verb_deu (verbs, row));
+
+  close_file (&file_verbs);
+  close_file (&file_row);
+
+  free (verbs);
 }
