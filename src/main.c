@@ -23,6 +23,7 @@ along with verbsitadeugtk.  If not, see <http://www.gnu.org/licenses/>. */
 #include <gtk/gtk.h>
 #include "verbs.h"
 #include "include/interface_verbs.h"
+#include "include/widgets_struct.h"
 
 static void
 on_activate (GtkApplication *app)
@@ -30,16 +31,15 @@ on_activate (GtkApplication *app)
   GtkWidget *window;
   GtkWidget *grid;
   GtkWidget *label_verb_ita;
-  GtkWidget *label_verb_deu;
-  GtkWidget *entry_verb_ita;
-  GtkWidget *entry_verb_deu;  
+  GtkWidget *label_verb_deu;  
   GtkWidget *button_rdm_verb_ita; 
   GtkWidget *button_rdm_verb_deu;
   GtkWidget *button_translate_verb_ita;
   GtkWidget *button_translate_verb_deu;
   GtkWidget *button_all_verbs;
   GtkWidget *button_exist_verb;
-
+  EntryWidgets *entrys = g_slice_new (EntryWidgets);
+  
   const gchar *title = "Verbs Ita Deu"; 
   
   window = gtk_application_window_new (app);
@@ -55,29 +55,30 @@ on_activate (GtkApplication *app)
   label_verb_ita = gtk_label_new ("Verb Ita");
   gtk_grid_attach (GTK_GRID (grid), label_verb_ita, 0, 0, 1, 1);
 
-  entry_verb_ita = gtk_entry_new ();
-  gtk_grid_attach (GTK_GRID (grid), entry_verb_ita, 1, 0, 1, 1);
+  entrys->entry_verb_ita = gtk_entry_new ();
+  gtk_grid_attach (GTK_GRID (grid), entrys->entry_verb_ita , 1, 0, 1, 1);
   
   label_verb_deu = gtk_label_new ("Verb Deu");
   gtk_grid_attach (GTK_GRID (grid), label_verb_deu, 0, 1, 1, 1);
 
-  entry_verb_deu = gtk_entry_new ();
-  gtk_grid_attach (GTK_GRID (grid), entry_verb_deu, 1, 1, 1, 1);
+  entrys->entry_verb_deu = gtk_entry_new ();
+  gtk_grid_attach (GTK_GRID (grid), entrys->entry_verb_deu, 1, 1, 1, 1);
 
   button_rdm_verb_ita = gtk_button_new_with_label ("Rdm verb Ita");  
   gtk_grid_attach (GTK_GRID (grid), button_rdm_verb_ita, 0, 2, 1, 1);
-  g_signal_connect (button_rdm_verb_ita, "clicked", G_CALLBACK (rdm_verb_ita), entry_verb_ita);
+  g_signal_connect (button_rdm_verb_ita, "clicked", G_CALLBACK (rdm_verb_ita), entrys);
   
   button_translate_verb_ita = gtk_button_new_with_label ("Translate verb Ita"); 
   gtk_grid_attach (GTK_GRID (grid), button_translate_verb_ita, 1, 2, 1, 1);
 
   button_rdm_verb_deu = gtk_button_new_with_label ("Rdm verb Deu");  
   gtk_grid_attach (GTK_GRID (grid), button_rdm_verb_deu, 0, 3, 1, 1);
-  g_signal_connect (button_rdm_verb_deu, "clicked", G_CALLBACK (rdm_verb_deu), entry_verb_deu);
-
+  g_signal_connect (button_rdm_verb_deu, "clicked", G_CALLBACK (rdm_verb_deu), entrys);
   
   button_translate_verb_deu = gtk_button_new_with_label ("Translate verb Deu"); 
   gtk_grid_attach (GTK_GRID (grid), button_translate_verb_deu, 1, 3, 1, 1);
+  g_signal_connect (button_translate_verb_deu, "clicked", G_CALLBACK (tra_verb_deu), entrys);
+
 
   button_all_verbs = gtk_button_new_with_label ("All Verbs");  
   gtk_grid_attach (GTK_GRID (grid), button_all_verbs, 0, 4, 1, 1);

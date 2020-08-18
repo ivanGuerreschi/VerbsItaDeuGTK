@@ -1,4 +1,4 @@
-/* interface_verbs.h
+/* widgets_struct.h
    Copyright (C) 2020 Ivan Guerreschi
 
 This file is part of verbsitadeugtk.
@@ -19,14 +19,15 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with verbsitadeugtk.  If not, see <http://www.gnu.org/licenses/>. */
 
-#ifndef INTERFACE_VERBS_H
-#define INTERFACE_VERBS_H
-
 #include <gtk/gtk.h>
-#include "include/widgets_struct.h"
 
-void rdm_verb_ita (GtkWidget *button, EntryWidgets *entrys);
-void rdm_verb_deu (GtkWidget *button, EntryWidgets *entrys);
-void tra_verb_deu (GtkWidget *button, EntryWidgets *entrys);
+#ifndef WIDGETS_STRUCT_H
+#define WIDGETS_STRUCT_H
 
-#endif /* INTERFACE_VERBS_H  */
+typedef struct GtkEntryPointers
+{
+  GtkWidget *entry_verb_ita;
+  GtkWidget *entry_verb_deu;
+} EntryWidgets;
+
+#endif /* WIDGETS_STRUCT_H */
