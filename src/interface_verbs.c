@@ -204,11 +204,13 @@ void on_btn_all_vebs_clicked (GtkWidget *button,
   int row = count_row_file (file_row);
   verb_t *verbs = all_verbs (file_verbs, row);
 
-  char dialog_verbs[50];
+  gchar *dialog_verbs = g_malloc (row * (50 * sizeof (gchar)));
   int pos = 0;
 
   for (int i = 0; i < row; i++)
-    pos += snprintf (&dialog_verbs[pos], 50, "%s-%s\n", verbs[i].ita, verbs[i].deu);
+    pos += g_snprintf (&dialog_verbs[pos], 50,  "%s-%s\n", verbs[i].ita, verbs[i].deu);
+
+
 
   GtkWidget *dialog;
   dialog = gtk_message_dialog_new (GTK_WINDOW (window),
@@ -216,6 +218,7 @@ void on_btn_all_vebs_clicked (GtkWidget *button,
                                    GTK_MESSAGE_INFO,
                                    GTK_BUTTONS_OK,
                                    "%s", dialog_verbs);
+
 
   gtk_window_set_title (GTK_WINDOW (dialog), "All verbs");
   gtk_dialog_run (GTK_DIALOG (dialog));
@@ -231,4 +234,6 @@ void on_btn_all_vebs_clicked (GtkWidget *button,
     }
 
   free (verbs);
+  g_free (dialog_verbs);
+
 }
