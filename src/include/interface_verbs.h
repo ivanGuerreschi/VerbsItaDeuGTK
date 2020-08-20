@@ -25,10 +25,11 @@ along with verbsitadeugtk.  If not, see <http://www.gnu.org/licenses/>. */
 #include <gtk/gtk.h>
 #include "include/widgets_struct.h"
 
-void rdm_verb_ita (GtkWidget *button, EntryWidgets *entrys);
-void rdm_verb_deu (GtkWidget *button, EntryWidgets *entrys);
-void tra_verb_deu (GtkWidget *button, EntryWidgets *entrys);
-void tra_verb_ita (GtkWidget *button, EntryWidgets *entrys);
-void exist_verb (GtkWidget *button, EntryWidgets *entrys);
+void on_btn_random_verb_ita_clicked (GtkWidget *button, EntryWidgets *entrys);
+void on_btn_random_verb_deu_clicked (GtkWidget *button, EntryWidgets *entrys);
+void on_btn_translate_verb_deu_clicked (GtkWidget *button, EntryWidgets *entrys);
+void on_btn_translate_verb_ita_clicked (GtkWidget *button, EntryWidgets *entrys);
+void on_btn_exist_verb_clicked (GtkWidget *button, EntryWidgets *entrys);
+void on_btn_all_vebs_clicked (GtkWidget *button, gpointer window);
 
 #endif /* INTERFACE_VERBS_H  */

@@ -28,8 +28,8 @@ along with verbsitadeugtk.  If not, see <http://www.gnu.org/licenses/>. */
 #include "include/widgets_struct.h"
 
 void
-rdm_verb_ita (GtkWidget *button,
-              EntryWidgets *entrys)
+on_btn_random_verb_ita_clicked (GtkWidget *button,
+                                EntryWidgets *entrys)
 {
   FILE *file_verbs, *file_row = NULL;
   open_file (&file_row, "verbs.dat");
@@ -53,8 +53,8 @@ rdm_verb_ita (GtkWidget *button,
 }
 
 void
-rdm_verb_deu (GtkWidget *button,
-              EntryWidgets *entrys)
+on_btn_random_verb_deu_clicked (GtkWidget *button,
+                                EntryWidgets *entrys)
 {
   FILE *file_verbs, *file_row = NULL;
   open_file (&file_row, "verbs.dat");
@@ -78,8 +78,8 @@ rdm_verb_deu (GtkWidget *button,
 }
 
 void
-tra_verb_deu (GtkWidget *button,
-              EntryWidgets *entrys)
+on_btn_translate_verb_deu_clicked (GtkWidget *button,
+                                   EntryWidgets *entrys)
 {
   FILE *file_verbs, *file_row = NULL;
   open_file (&file_row, "verbs.dat");
@@ -115,8 +115,8 @@ tra_verb_deu (GtkWidget *button,
 }
 
 void
-tra_verb_ita (GtkWidget *button,
-              EntryWidgets *entrys)
+on_btn_translate_verb_ita_clicked (GtkWidget *button,
+                                   EntryWidgets *entrys)
 {
   FILE *file_verbs, *file_row = NULL;
   open_file (&file_row, "verbs.dat");
@@ -152,8 +152,8 @@ tra_verb_ita (GtkWidget *button,
 }
 
 void
-exist_verb (GtkWidget *button,
-            EntryWidgets *entrys)
+on_btn_exist_verb_clicked (GtkWidget *button,
+                           EntryWidgets *entrys)
 {
   FILE *file_verbs, *file_row = NULL;
   open_file (&file_row, "verbs.dat");
@@ -193,3 +193,42 @@ exist_verb (GtkWidget *button,
   free (verbs);
 }
 
+void on_btn_all_vebs_clicked (GtkWidget *button,
+                              gpointer window)
+{
+
+  FILE *file_verbs, *file_row = NULL;
+  open_file (&file_row, "verbs.dat");
+  open_file (&file_verbs, "verbs.dat");
+
+  int row = count_row_file (file_row);
+  verb_t *verbs = all_verbs (file_verbs, row);
+
+  char dialog_verbs[50];
+  int pos = 0;
+
+  for (int i = 0; i < row; i++)
+    pos += snprintf (&dialog_verbs[pos], 50, "%s-%s\n", verbs[i].ita, verbs[i].deu);
+
+  GtkWidget *dialog;
+  dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                   GTK_MESSAGE_INFO,
+                                   GTK_BUTTONS_OK,
+                                   "%s", dialog_verbs);
+
+  gtk_window_set_title (GTK_WINDOW (dialog), "All verbs");
+  gtk_dialog_run (GTK_DIALOG (dialog));
+  gtk_widget_destroy (dialog);
+
+  close_file (&file_verbs);
+  close_file (&file_row);
+
+  for (int i = 0; i < row; i++)
+    {
+      free (verbs[i].ita);
+      free (verbs[i].deu);
+    }
+
+  free (verbs);
+}

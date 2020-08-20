@@ -66,26 +66,28 @@ on_activate (GtkApplication *app)
 
   button_rdm_verb_ita = gtk_button_new_with_label ("Rdm verb Ita");
   gtk_grid_attach (GTK_GRID (grid), button_rdm_verb_ita, 0, 2, 1, 1);
-  g_signal_connect (button_rdm_verb_ita, "clicked", G_CALLBACK (rdm_verb_ita), entrys);
+  g_signal_connect (button_rdm_verb_ita, "clicked", G_CALLBACK (on_btn_random_verb_ita_clicked), entrys);
 
   button_translate_verb_ita = gtk_button_new_with_label ("Translate verb Ita");
   gtk_grid_attach (GTK_GRID (grid), button_translate_verb_ita, 1, 2, 1, 1);
-  g_signal_connect (button_translate_verb_ita, "clicked", G_CALLBACK (tra_verb_ita), entrys);
+  g_signal_connect (button_translate_verb_ita, "clicked", G_CALLBACK (on_btn_translate_verb_ita_clicked), entrys);
 
   button_rdm_verb_deu = gtk_button_new_with_label ("Rdm verb Deu");
   gtk_grid_attach (GTK_GRID (grid), button_rdm_verb_deu, 0, 3, 1, 1);
-  g_signal_connect (button_rdm_verb_deu, "clicked", G_CALLBACK (rdm_verb_deu), entrys);
+  g_signal_connect (button_rdm_verb_deu, "clicked", G_CALLBACK (on_btn_random_verb_deu_clicked), entrys);
 
   button_translate_verb_deu = gtk_button_new_with_label ("Translate verb Deu");
   gtk_grid_attach (GTK_GRID (grid), button_translate_verb_deu, 1, 3, 1, 1);
-  g_signal_connect (button_translate_verb_deu, "clicked", G_CALLBACK (tra_verb_deu), entrys);
+  g_signal_connect (button_translate_verb_deu, "clicked", G_CALLBACK (on_btn_translate_verb_deu_clicked), entrys);
 
   button_all_verbs = gtk_button_new_with_label ("All Verbs");
   gtk_grid_attach (GTK_GRID (grid), button_all_verbs, 0, 4, 1, 1);
+    g_signal_connect (button_all_verbs, "clicked", G_CALLBACK (on_btn_all_vebs_clicked), window);
+
 
   button_exist_verb = gtk_button_new_with_label ("Exist Verb");
   gtk_grid_attach (GTK_GRID (grid), button_exist_verb, 1, 4, 1, 1);
-  g_signal_connect (button_exist_verb, "clicked", G_CALLBACK (exist_verb), entrys);
+  g_signal_connect (button_exist_verb, "clicked", G_CALLBACK (on_btn_exist_verb_clicked), entrys);
 
   gtk_widget_show_all (window);
 }
