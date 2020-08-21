@@ -82,7 +82,7 @@ on_activate (GtkApplication *app)
 
   button_all_verbs = gtk_button_new_with_label ("All Verbs");
   gtk_grid_attach (GTK_GRID (grid), button_all_verbs, 0, 4, 1, 1);
-    g_signal_connect (button_all_verbs, "clicked", G_CALLBACK (on_btn_all_vebs_clicked), window);
+    g_signal_connect (button_all_verbs, "clicked", G_CALLBACK (on_btn_all_vebs_clicked), NULL);
 
 
   button_exist_verb = gtk_button_new_with_label ("Exist Verb");

@@ -194,46 +194,27 @@ on_btn_exist_verb_clicked (GtkWidget *button,
 }
 
 void on_btn_all_vebs_clicked (GtkWidget *button,
-                              gpointer window)
+                              gpointer data)
 {
+  GtkWidget *window;
+  GtkWidget *text_view;
+  GtkWidget *scrolled_window;
 
-  FILE *file_verbs, *file_row = NULL;
-  open_file (&file_row, "verbs.dat");
-  open_file (&file_verbs, "verbs.dat");
+  window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_title (GTK_WINDOW (window), "All Verbs");
+  gtk_window_set_default_size (GTK_WINDOW (window), 200, 200);
 
-  int row = count_row_file (file_row);
-  verb_t *verbs = all_verbs (file_verbs, row);
+  text_view = gtk_text_view_new ();
 
-  gchar *dialog_verbs = g_malloc (row * (50 * sizeof (gchar)));
-  int pos = 0;
+  scrolled_window = gtk_scrolled_window_new (NULL, NULL);
 
-  for (int i = 0; i < row; i++)
-    pos += g_snprintf (&dialog_verbs[pos], 50,  "%s-%s\n", verbs[i].ita, verbs[i].deu);
+  gtk_container_set_border_width (GTK_CONTAINER (scrolled_window), 10);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
+                                  GTK_POLICY_AUTOMATIC,
+                                  GTK_POLICY_AUTOMATIC);
 
+  gtk_container_add (GTK_CONTAINER (scrolled_window), text_view);
+  gtk_container_add (GTK_CONTAINER (window), scrolled_window);
 
-
-  GtkWidget *dialog;
-  dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                   GTK_DIALOG_DESTROY_WITH_PARENT,
-                                   GTK_MESSAGE_INFO,
-                                   GTK_BUTTONS_OK,
-                                   "%s", dialog_verbs);
-
-
-  gtk_window_set_title (GTK_WINDOW (dialog), "All verbs");
-  gtk_dialog_run (GTK_DIALOG (dialog));
-  gtk_widget_destroy (dialog);
-
-  close_file (&file_verbs);
-  close_file (&file_row);
-
-  for (int i = 0; i < row; i++)
-    {
-      free (verbs[i].ita);
-      free (verbs[i].deu);
-    }
-
-  free (verbs);
-  g_free (dialog_verbs);
-
+  gtk_widget_show_all (window);
 }
