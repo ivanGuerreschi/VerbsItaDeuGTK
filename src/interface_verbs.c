@@ -199,6 +199,20 @@ void on_btn_all_vebs_clicked (GtkWidget *button,
   GtkWidget *window;
   GtkWidget *text_view;
   GtkWidget *scrolled_window;
+  GtkTextBuffer *buffer;
+
+  FILE *file_verbs, *file_row = NULL;
+  open_file (&file_row, "verbs.dat");
+  open_file (&file_verbs, "verbs.dat");
+
+  int row = count_row_file (file_row);
+  verb_t *verbs = all_verbs (file_verbs, row);
+
+  gchar *text_view_verbs = g_malloc (row * (50 * sizeof (gchar)));
+  int pos = 0;
+
+  for (int i = 0; i < row; i++)
+    pos += g_snprintf (&text_view_verbs[pos], 50, "%s - %s\n", verbs[i].ita, verbs[i].deu);
 
   window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title (GTK_WINDOW (window), "All Verbs");
@@ -206,9 +220,13 @@ void on_btn_all_vebs_clicked (GtkWidget *button,
 
   text_view = gtk_text_view_new ();
 
+  buffer = gtk_text_buffer_new (NULL);
+  gtk_text_view_set_buffer (GTK_TEXT_VIEW (text_view), buffer);
+  gtk_text_buffer_set_text (buffer, text_view_verbs, -1);
+
   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
 
-  gtk_container_set_border_width (GTK_CONTAINER (scrolled_window), 10);
+  gtk_container_set_border_width (GTK_CONTAINER (scrolled_window), 5);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
                                   GTK_POLICY_AUTOMATIC,
                                   GTK_POLICY_AUTOMATIC);
@@ -217,4 +235,16 @@ void on_btn_all_vebs_clicked (GtkWidget *button,
   gtk_container_add (GTK_CONTAINER (window), scrolled_window);
 
   gtk_widget_show_all (window);
+
+  close_file (&file_verbs);
+  close_file (&file_row);
+
+  for (int i = 0; i < row; i++)
+    {
+      free (verbs[i].ita);
+      free (verbs[i].deu);
+    }
+
+  free (verbs);
+  g_free (text_view_verbs);
 }
