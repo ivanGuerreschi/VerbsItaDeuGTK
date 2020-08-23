@@ -90,7 +90,6 @@ on_btn_translate_verb_deu_clicked (GtkWidget *button,
   const gchar *translate_OK = "Translate OK";
   const gchar *translate_not_OK = "Translate not OK";
 
-
   int row = count_row_file (file_row);
   verb_t *verbs = all_verbs (file_verbs, row);
 
@@ -127,7 +126,6 @@ on_btn_translate_verb_ita_clicked (GtkWidget *button,
   const gchar *translate_OK = "Translate OK";
   const gchar *translate_not_OK = "Translate not OK";
 
-
   int row = count_row_file (file_row);
   verb_t *verbs = all_verbs (file_verbs, row);
 
@@ -163,7 +161,6 @@ on_btn_exist_verb_clicked (GtkWidget *button,
   const gchar *verb_ita;
   const gchar *verb_exist = "Verb exist";
   const gchar *verb_not_exist = "Verb not exist";
-
 
   int row = count_row_file (file_row);
   verb_t *verbs = all_verbs (file_verbs, row);
