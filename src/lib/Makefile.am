@@ -23,7 +23,7 @@ AM_CFLAGS = -I $(top_srcdir)/src/lib -Wall -Wextra -Wpedantic \
           -Wformat=2 -Wno-unused-parameter -Wshadow \
           -Wwrite-strings -Wstrict-prototypes -Wold-style-definition \
           -Wredundant-decls -Wnested-externs -Wmissing-include-dirs \
-          -Wjump-misses-init -Wlogical-op
+          -Wjump-misses-init -Wlogical-op 
 
 noinst_LIBRARIES = libverbs.a
 noinst_HEADERS = verbs.h

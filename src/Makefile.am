@@ -24,7 +24,7 @@ AM_CFLAGS = $(GTK_CFLAGS) -I $(top_srcdir)/src -I $(top_srcdir)/src/lib \
           -Wformat=2 -Wno-unused-parameter -Wshadow \
           -Wwrite-strings -Wstrict-prototypes -Wold-style-definition \
           -Wredundant-decls -Wnested-externs -Wmissing-include-dirs \
-	  -Wjump-misses-init -Wlogical-op	
+	  -Wjump-misses-init -Wlogical-op 	
 
 bin_PROGRAMS = verbsitadeugtk
 verbsitadeugtk_SOURCES = main.c interface_verbs.c

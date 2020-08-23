@@ -32,8 +32,8 @@ on_btn_random_verb_ita_clicked (GtkWidget *button,
                                 EntryWidgets *entrys)
 {
   FILE *file_verbs, *file_row = NULL;
-  open_file (&file_row, "verbs.dat");
-  open_file (&file_verbs, "verbs.dat");
+  open_file (&file_row, "verbs.txt");
+  open_file (&file_verbs, "verbs.txt");
 
   int row = count_row_file (file_row);
   verb_t *verbs = all_verbs (file_verbs, row);
@@ -57,8 +57,8 @@ on_btn_random_verb_deu_clicked (GtkWidget *button,
                                 EntryWidgets *entrys)
 {
   FILE *file_verbs, *file_row = NULL;
-  open_file (&file_row, "verbs.dat");
-  open_file (&file_verbs, "verbs.dat");
+  open_file (&file_row, "verbs.txt");
+  open_file (&file_verbs, "verbs.txt");
 
   int row = count_row_file (file_row);
   verb_t *verbs = all_verbs (file_verbs, row);
@@ -82,8 +82,8 @@ on_btn_translate_verb_deu_clicked (GtkWidget *button,
                                    EntryWidgets *entrys)
 {
   FILE *file_verbs, *file_row = NULL;
-  open_file (&file_row, "verbs.dat");
-  open_file (&file_verbs, "verbs.dat");
+  open_file (&file_row, "verbs.txt");
+  open_file (&file_verbs, "verbs.txt");
 
   const gchar *verb_deu;
   const gchar *verb_ita;
@@ -119,8 +119,8 @@ on_btn_translate_verb_ita_clicked (GtkWidget *button,
                                    EntryWidgets *entrys)
 {
   FILE *file_verbs, *file_row = NULL;
-  open_file (&file_row, "verbs.dat");
-  open_file (&file_verbs, "verbs.dat");
+  open_file (&file_row, "verbs.txt");
+  open_file (&file_verbs, "verbs.txt");
 
   const gchar *verb_deu;
   const gchar *verb_ita;
@@ -156,8 +156,8 @@ on_btn_exist_verb_clicked (GtkWidget *button,
                            EntryWidgets *entrys)
 {
   FILE *file_verbs, *file_row = NULL;
-  open_file (&file_row, "verbs.dat");
-  open_file (&file_verbs, "verbs.dat");
+  open_file (&file_row, "verbs.txt");
+  open_file (&file_verbs, "verbs.txt");
 
   const gchar *verb_deu;
   const gchar *verb_ita;
@@ -202,8 +202,8 @@ void on_btn_all_vebs_clicked (GtkWidget *button,
   GtkTextBuffer *buffer;
 
   FILE *file_verbs, *file_row = NULL;
-  open_file (&file_row, "verbs.dat");
-  open_file (&file_verbs, "verbs.dat");
+  open_file (&file_row, "verbs.txt");
+  open_file (&file_verbs, "verbs.txt");
 
   int row = count_row_file (file_row);
   verb_t *verbs = all_verbs (file_verbs, row);
@@ -212,7 +212,13 @@ void on_btn_all_vebs_clicked (GtkWidget *button,
   int pos = 0;
 
   for (int i = 0; i < row; i++)
-    pos += g_snprintf (&text_view_verbs[pos], 50, "%s - %s\n", verbs[i].ita, verbs[i].deu);
+    pos += g_snprintf (&text_view_verbs[pos], 50, "%s-%s\n", verbs[i].ita, verbs[i].deu);
+
+  if (!g_utf8_validate (text_view_verbs, -1, NULL))
+    {
+      g_printerr ("%s\n %s", "Invalid UTF-8 filename", text_view_verbs);
+      return;
+    }
 
   window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title (GTK_WINDOW (window), "All Verbs");
